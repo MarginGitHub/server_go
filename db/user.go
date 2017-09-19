@@ -19,7 +19,7 @@ type User struct {
 	Amount float32 `json:"amount"`
 }
 
-func (this *User)add() (sql.Result, error)  {
+func (this *User)Add() (sql.Result, error)  {
 	sql := "insert into user(user_id, mobile, nick_name, 
 		head_img_url, sex, ref_user_id, login_count, last_login_time, create_time, token, wilddog_token, amount)
 		 values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -27,7 +27,7 @@ func (this *User)add() (sql.Result, error)  {
 		this.RefUserId, this.LoginCount, this.LastLoginTime, this.CreateTime, this.Token, this.WilddogToken, this.Amount)
 }
 
-func (this *User)query() error {
+func (this *User)Query() error {
 	sql := "select * from user where user_id=?"
 	rows, err := UserDb.Query(sql, this.UserId)
 	if err != nil {
@@ -41,3 +41,4 @@ func (this *User)query() error {
 	}
 	return nil
 }
+

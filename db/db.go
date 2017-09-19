@@ -22,3 +22,14 @@ var DoctorDb *sql.DB = func ()  {
 		return nil
 	}
 }
+
+func Close()  {
+	if UserDb != nil {
+		UserDb.Close()
+		UserDb = nil
+	}
+	if DoctorDb != nil {
+		DoctorDb.Close()
+		DoctorDb = nil
+	}
+}
