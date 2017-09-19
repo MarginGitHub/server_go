@@ -17,5 +17,26 @@
         <input type="datetime" name="datetime"/> <br>
         <input type="submit"/>
     </form>
+    <form action="form" method="post">
+        <input type="range" name="range" min="0" max="100" step="10"><br>
+        <input type="submit">
+    </form>
+    <form action="datalist" method="post">
+        <input list="list", name="list">
+        <datalist id="list">
+            <option value="星期一"/>
+            <option value="星期二"/>
+            <option value="星期三"/>
+            <option value="星期四"/>
+            <option value="星期五"/>
+            <option value="星期六"/>
+            <option value="星期日"/>
+        </datalist>
+        <input type="submit">
+    </form>
+    <form enctype="multipart/form-data" action="file" method="post">
+        <input type="file" name="file"><br>
+        <input type="submit">
+    </form>
 </body>
 </html>
