@@ -6,6 +6,7 @@ import (
 	// "fmt"
 	"os"
 	"io"
+	"github.com/margin/server/db"
 )
 
 const PAGE_PATH = `D:\dev\server\go\src\github.com\margin\server\pages\`
@@ -74,9 +75,41 @@ func json(c *gin.Context)  {
 	}
 }
 
+func user(c *gin.Context)  {
+	c.File(PAGE_PATH + "user.html")
+}
+
+func addUser(c *gin.Context)  {
+	var user db.User
+	err := c.Bind(&user)
+	if err == nil {
+		ret, err := user.Add()
+		if err != nil {
+			c.String(http.StatusNotFound, "err: %v\n", err)
+		} else {
+			c.String(http.StatusOK, "ok, insert user at %d\n", ret)
+		}
+	} else {
+		c.String(http.StatusNotFound, "err: %v\n", err)
+	}
+}
+
+func userList(c *gin.Context)  {
+	users, err := db.QueryAllUsers()
+	if err != nil {
+		c.String(http.StatusNotFound, "err: %v\n", err)
+		return
+	}
+	c.HTML(http.StatusOK, "userlist.html", gin.H {
+		"users": users, 
+	})
+}
+
 func Run()  {
 	// gin.SetMode(gin.ReleaseMode)
 	router := gin.Default();
+	router.LoadHTMLGlob(PAGE_PATH + "templates/*")
+	router.Static("/res", PAGE_PATH + "res")
 	v1 := router.Group("/v1")
 	{
 		v1.GET("/", index)
@@ -90,7 +123,12 @@ func Run()  {
 		v2.GET("/", indexV2)
 		v2.POST("/json", json)
 	}
-	
+	v3 := router.Group("/v3")
+	{
+		v3.GET("/", user)
+		v3.POST("/addUser", addUser)
+		v3.GET("/userlist", userList)
+	}	
 	// router.GET("/:name", file)
 	router.Run("192.168.1.105:3000")
 }

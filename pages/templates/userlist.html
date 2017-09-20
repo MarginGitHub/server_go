@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link href="css/style.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="/res/bootstrap/css/bootstrap.min.css">
+        <script src="/res/bootstrap/js/bootstrap.min.js">
+        </script>
+        <title>用户列表</title>
+    </head>
+    <body>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <th>UserId</th>
+                    <th>Mobile</th>
+                    <th>Password</th>
+                    <th>NickName</th>
+                    <th>HeadImgUrl</th>
+                    <th>Sex</th>
+                    <th>RefUserId</th>
+                    <th>LoginCount</th>
+                    <th>LastLoginTime</th>
+                    <th>CreateTime</th>
+                    <th>Token</th>
+                    <th>WilddogToken</th>
+                    <th>Amount</th>
+                </thead>
+                <tbody>
+                    {{range .users}}
+                    <tr>
+                        <td>{{.UserId}}</td>
+                        <td>{{.Mobile}}</td>
+                        <td>{{.Password}}</td>
+                        <td>{{.NickName}}</td>
+                        <td>{{.HeadImgUrl}}</td>
+                        <td>{{.Sex}}</td>
+                        <td>{{.RefUserId}}</td>
+                        <td>{{.LoginCount}}</td>
+                        <td>{{.LastLoginTime}}</td>
+                        <td>{{.CreateTime}}</td>
+                        <td>{{.Token}}</td>
+                        <td>{{.WilddogToken}}</td>
+                        <td>{{.Amount}}</td>
+                    </tr>
+                    {{end}}
+                </tbody>
+            </table>
+        </div>
+        
+    </body>
+</html>
